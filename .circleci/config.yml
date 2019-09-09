@@ -18,7 +18,7 @@ jobs:
         command: ls
      - run:
         name: Update npm
-        command: 'npm run spec_test:suka'
+        command: cd Demo && 'npm run spec_test:suka'
 workflows:
   build:
     jobs:
