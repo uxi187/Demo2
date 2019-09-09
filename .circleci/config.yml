@@ -17,6 +17,12 @@ jobs:
         name: see tree
         command: ls
      - run:
+        name: see tree
+        command: cd Demo
+     - run:
+        name: see tree
+        command: ls
+     - run:
         name: Update npm
         command: cd Demo && 'npm run spec_test:suka'
 workflows:
