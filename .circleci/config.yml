@@ -1,6 +1,13 @@
 version: 2.1
 orbs:
-  cypress: cypress-io/cypress@1.8.0   
+  cypress: cypress-io/cypress@1.8.0
+jobs:
+  milan: 
+    steps:
+     - checkout
+     - run:
+        name: Update npm
+        command: 'npm run cleanup'
 workflows:
   build:
     jobs:
@@ -17,3 +24,4 @@ workflows:
             - store_test_results:
                 path: /root/project/cypress/test-results/cucumber-json
                 prefix: test
+      - milan
