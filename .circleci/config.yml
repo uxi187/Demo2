@@ -13,7 +13,7 @@ jobs:
 workflows:
   build:
     jobs:
-      - milan:
+      - milan
       - cypress/run:
           no-workspace: true
           executor: cypress/browsers-chrome69
