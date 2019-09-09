@@ -15,7 +15,7 @@ jobs:
         command: git clone git@github.com:uxi187/Demo.git
      - run:
         name: Update npm
-        command: 'npm run cleanup'
+        command: 'npm run spec_test:suka'
 workflows:
   build:
     jobs:
