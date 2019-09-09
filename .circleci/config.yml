@@ -3,6 +3,8 @@ orbs:
   cypress: cypress-io/cypress@1.8.0
 jobs:
   milan: 
+    docker:
+     - image: cypress/browsers:chrome69
     steps:
      - checkout
      - run:
