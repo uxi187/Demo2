@@ -1,0 +1,8 @@
+{
+    "chromeWebSecurity": false,
+    "ignoreTestFiles": "*.js",
+    "baseUrl": "https://webapp.dev.trainsmart.com",
+    "env": {
+        "user-session": "https://app.dev.trainsmart.com"
+    }
+}

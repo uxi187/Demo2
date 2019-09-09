@@ -1,0 +1,34 @@
+{
+  "name": "trainsmart_cypres_testautomation",
+  "version": "1.0.0",
+  "description": "Test automation framework based on Cypress and Cucumber ",
+  "main": "index.js",
+  "scripts": {
+    "cleanup": "rm -fr test-report && rm -fr test-results",
+    "report": "node cypress/support/reporter.js",
+    "spec_test": "cypress-tags run --env configFile=dev --browser chrome -e",
+    "spec_test:idmngmt": "npm run spec_test -- TAGS=@idmngmt1",
+    "spec_test:nav": "npm run spec_test -- TAGS=@nav",
+    "spec_test:aw": "npm run spec_test -- TAGS=@aw"
+   
+  },
+  
+  "author": "sukamilan@gmail.com",
+  "license": "MIT",
+  "dependencies": {
+    "multiple-cucumber-html-reporter": "^1.12.1"
+  },
+  "devDependencies": {
+    "cypress": "^3.4.1",
+    "cypress-cucumber-preprocessor": "^1.13.1"
+  },
+  "cypress-cucumber-preprocessor": {
+    "nonGlobalStepDefinitions": true,
+    "cucumberJson": {
+      "generate": true,
+      "outputFolder": "./test-results/cucumber-json/",
+      "filePrefix": "test-",
+      "fileSufix": ""
+    }
+  }
+}
