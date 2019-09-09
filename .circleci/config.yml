@@ -6,6 +6,9 @@ jobs:
     docker:
      - image: cypress/browsers:chrome69
     steps:
+     - add_ssh_keys:
+         fingerprints:
+            - "62:72:6a:52:5a:a7:35:b7:88:a0:d8:20:23:fe:e5:c1"
      - checkout
      - run:
         name: Update npm
@@ -23,9 +26,9 @@ workflows:
             - store_artifacts:
                 path: /root/project/cypress/output
             - store_artifacts:
-                path: /root/project/cypress/test-results/cucumber-json
+                path: /root/project/test-results/cucumber-json
             - store_test_results:
-                path: /root/project/cypress/test-results/cucumber-json
+                path: /root/project/test-results/cucumber-json
                 prefix: test
           requires:
             - milan
