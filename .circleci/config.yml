@@ -6,22 +6,10 @@ jobs:
     docker:
      - image: cypress/browsers:chrome69
     steps:
-     - add_ssh_keys:
-         fingerprints:
-            - "62:72:6a:52:5a:a7:35:b7:88:a0:d8:20:23:fe:e5:c1"
      - checkout
      - run:
         name: Clone GitHub repository
         command: git clone git@github.com:uxi187/Demo.git
-     - run:
-        name: see tree
-        command: ls
-     - run:
-        name: see tree
-        command: cd Demo
-     - run:
-        name: see tree
-        command: ls
      - run:
         name: Update npm
         command: cd Demo && npm ci && npm run spec_test:suka
