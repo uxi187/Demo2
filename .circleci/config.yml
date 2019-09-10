@@ -11,8 +11,9 @@ jobs:
         name: Clone GitHub repository
         command: git clone git@github.com:uxi187/Demo.git
      - run:
-        name: Update npm
-        command: cd Demo && npm ci && npm run spec_test:suka
+        name: Clone GitHub repository
+        command: npm ci && npm run spec_test:suka
+        working_directory: ~/Demo
 workflows:
   build:
     jobs:
