@@ -13,7 +13,7 @@ jobs:
      - run:
         name: Clone GitHub repository
         command: npm ci && npm run spec_test:suka
-        working_directory: ~/Demo
+        working_directory: ~/project/Demo
 workflows:
   build:
     jobs:
