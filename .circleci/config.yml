@@ -1,6 +1,6 @@
 version: 2.1
 jobs:
-  milan: 
+  milan:
     docker:
      - image: cypress/browsers:chrome69
     steps:
@@ -34,26 +34,26 @@ jobs:
             exit 1
           fi
         working_directory: '~/project/Demo'
-    - run:
+     - run:
         name: Npm CI
         command: npm ci
         working_directory: '~/project/Demo'
-    - run:
+     - run:
         command: npx cypress verify
         working_directory: '~/project/Demo'
-    - save_cache:
+     - save_cache:
         key: cache-{{ arch }}-{{ .Branch }}-{{ checksum "package.json" }}
         paths:
         - ~/.npm
         - ~/.cache
-    - run:
+     - run:
         command: npm run spec_test:suka
         working_directory: '~/project/Demo'
 workflows:
   build:
     jobs:
       - milan
-      - run_cypress
+      - run_cypress:
           requires:
             - milan
      
