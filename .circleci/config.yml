@@ -16,7 +16,7 @@ jobs:
      - persist_to_workspace:
          root: ~/project
          paths:
-           - Demo
+           - Demo/*
   run_cypress:
     docker:
      - image: cypress/browsers:chrome69
@@ -26,9 +26,6 @@ jobs:
         at: ~/
      - run:
         name: Directory
-        command: dir
-     - run:
-        name: Ls
         command: dir
      - run:
         name: Npm CI
