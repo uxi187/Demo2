@@ -20,11 +20,10 @@ workflows:
     jobs:
       - milan
       - cypress/run:
+          no-workspace: false
           executor: cypress/browsers-chrome69
           command: npm run spec_test:suka
           working_directory: ~/project/Demo
-            - attach_workspace:
-                at: ~/project/Demo
           post-steps:
             - run: node cypress/support/reporter.js
             - store_artifacts:
