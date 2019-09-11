@@ -4,7 +4,6 @@ jobs:
     docker:
      - image: cypress/browsers:chrome69
     steps:
-     - checkout
      - run:
         name: Clone GitHub repository
         command: git clone git@github.com:uxi187/Demo.git
@@ -20,9 +19,8 @@ jobs:
      - image: cypress/browsers:chrome69
     parallelism: 1
     steps:
-     - checkout
      - attach_workspace:
-        at: ~/Demo
+        at: ~/
      - run:
         name: Directory
         command: dir
