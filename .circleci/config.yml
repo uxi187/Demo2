@@ -6,7 +6,7 @@ jobs:
     steps:
      - add_ssh_keys:
         fingerprints:
-           - "ed:e0:ca:12:b8:00:2b:63:d5:a0:7a:d7:c5:5b:09:84"
+           - "b4:8c:27:c2:2b:3e:1d:8c:a5:b0:2d:55:6c:8a:26:f1"
      - run:
         name: Clone GitHub repository
         command: git clone git@github.com:uxi187/Demo.git
