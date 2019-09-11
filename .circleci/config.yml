@@ -10,13 +10,13 @@ jobs:
      - run:
         name: Clone GitHub repository
         command: git clone git@github.com:uxi187/Demo.git
-     - persist_to_workspace:
-         root: ~/project/Demo
-         paths:
-           - Demo/*
      - run:
         name: Ls
         command: dir
+     - persist_to_workspace:
+         root: ~/project
+         paths:
+           - Demo/*
 workflows:
   build:
     jobs:
