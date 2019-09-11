@@ -8,6 +8,8 @@ jobs:
     steps:
      - persist_to_workspace:
          root: ~/project/Demo
+         paths:
+           - Demo/*
      - checkout
      - run:
         name: Clone GitHub repository
