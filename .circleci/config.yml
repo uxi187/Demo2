@@ -23,9 +23,15 @@ jobs:
      - checkout
      - attach_workspace:
         at: ~/
+     - run:
+        name: Ls
+        command: dir
      - restore_cache:
         keys:
          - cache-{{ arch }}-{{ .Branch }}-{{ checksum "package.json" }}
+     - run:
+        name: Ls
+        command: dir
      - run:
         name: Check if package-lock.json exists
         command: |
