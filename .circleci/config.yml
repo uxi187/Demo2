@@ -6,8 +6,8 @@ jobs:
     docker:
      - image: cypress/browsers:chrome69
     steps:
-     - attach_workspace:
-         at: /tmp/workspace
+     - persist_to_workspace:
+         root: ~/project/Demo
      - checkout
      - run:
         name: Clone GitHub repository
@@ -20,6 +20,8 @@ workflows:
     jobs:
       - milan
       - cypress/run:
+        - attach_workspace:
+             at: ~/project/Demo
           executor: cypress/browsers-chrome69
           command: npm run spec_test:suka
           working_directory: ~/project/Demo
