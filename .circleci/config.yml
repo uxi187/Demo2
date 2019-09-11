@@ -16,14 +16,14 @@ jobs:
      - persist_to_workspace:
          root: ~/project
          paths:
-           - Demo/*
+           - Demo
   run_cypress:
     docker:
      - image: cypress/browsers:chrome69
     parallelism: 1
     steps:
      - attach_workspace:
-        at: ~/
+        at: ~/Demo
      - run:
         name: Directory
         command: dir
