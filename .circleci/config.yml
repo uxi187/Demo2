@@ -29,6 +29,9 @@ jobs:
         name: Directory
         command: dir
      - run:
+        name: Directory under demo
+        command: cd Demo && dir
+     - run:
         name: Npm CI
         command: npm ci
         working_directory: '~/project/Demo'
