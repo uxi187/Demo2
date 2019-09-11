@@ -20,9 +20,9 @@ workflows:
     jobs:
       - milan
       - cypress/run:
-        - attach_workspace:
-             at: ~/project/Demo
           executor: cypress/browsers-chrome69
+          attach_workspace:
+             at: ~/project/Demo
           command: npm run spec_test:suka
           working_directory: ~/project/Demo
           post-steps:
