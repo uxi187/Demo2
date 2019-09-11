@@ -12,9 +12,9 @@ jobs:
         name: Ls
         command: dir
      - persist_to_workspace:
-         root: ~/project
+         root: ~/
          paths:
-           - Demo/*
+           - Demo
   run_cypress:
     docker:
      - image: cypress/browsers:chrome69
