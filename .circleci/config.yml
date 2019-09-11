@@ -12,7 +12,7 @@ jobs:
         name: Ls
         command: dir
      - persist_to_workspace:
-         root: ~/
+         root: ~/project
          paths:
            - Demo
   run_cypress:
