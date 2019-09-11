@@ -41,14 +41,14 @@ jobs:
             echo "and commit 'package-lock.json' to your repo."
             exit 1
           fi
-        working_directory: '~/project/Demo'
+        working_directory: ''
      - run:
         name: Npm CI
         command: npm ci
-        working_directory: '~/project/Demo'
+        working_directory: ''
      - run:
         command: npx cypress verify
-        working_directory: '~/project/Demo'
+        working_directory: ''
      - save_cache:
         key: cache-{{ arch }}-{{ .Branch }}-{{ checksum "package.json" }}
         paths:
@@ -56,7 +56,7 @@ jobs:
         - ~/.cache
      - run:
         command: npm run spec_test:suka
-        working_directory: '~/project/Demo'
+        working_directory: ''
 workflows:
   build:
     jobs:
