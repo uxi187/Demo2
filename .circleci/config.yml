@@ -31,13 +31,13 @@ jobs:
      - run:
         name: Npm CI
         command: npm ci
-        working_directory: ''
+        working_directory: '~/project/Demo'
      - run:
         command: npx cypress verify
-        working_directory: ''
+        working_directory: '~/project/Demo'
      - run:
         command: npm run spec_test:suka
-        working_directory: ''
+        working_directory: '~/project/Demo'
 workflows:
   build:
     jobs:
