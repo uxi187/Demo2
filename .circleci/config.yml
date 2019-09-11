@@ -1,6 +1,4 @@
 version: 2.1
-orbs:
-  cypress: cypress-io/cypress@1.8.0
 jobs:
   milan: 
     docker:
@@ -17,24 +15,45 @@ jobs:
          root: ~/project
          paths:
            - Demo/*
+  run_cypress:
+    docker:
+     - image: cypress/browsers:chrome69
+    parallelism: 1
+    steps:
+     - checkout
+     - restore_cache:
+        keys:
+         - cache-{{ arch }}-{{ .Branch }}-{{ checksum "package.json" }}
+     - run:
+        name: Check if package-lock.json exists
+        command: |
+          if [ ! -e ./package-lock.json ]; then
+            echo "The Cypress orb uses 'npm ci' to install 'node_modules', which requires a 'package-lock.json'."
+            echo "A 'package-lock.json' file was not found. Please run 'npm install' in your project,"
+            echo "and commit 'package-lock.json' to your repo."
+            exit 1
+          fi
+        working_directory: '~/project/Demo'
+    - run:
+        name: Npm CI
+        command: npm ci
+        working_directory: '~/project/Demo'
+    - run:
+        command: npx cypress verify
+        working_directory: '~/project/Demo'
+    - save_cache:
+        key: cache-{{ arch }}-{{ .Branch }}-{{ checksum "package.json" }}
+        paths:
+        - ~/.npm
+        - ~/.cache
+    - run:
+        command: npm run spec_test:suka
+        working_directory: '~/project/Demo'
 workflows:
   build:
     jobs:
       - milan
-      - cypress/run:
-          no-workspace: false
-          executor: cypress/browsers-chrome69
-          command: npm run spec_test:suka
-          working_directory: ~/project/Demo
-          post-steps:
-            - run: node cypress/support/reporter.js
-            - store_artifacts:
-                path: /root/project/cypress/output
-            - store_artifacts:
-                path: /root/project/test-results/cucumber-json
-            - store_test_results:
-                path: /root/project/test-results/cucumber-json
-                prefix: test
+      - run_cypress
           requires:
             - milan
      
