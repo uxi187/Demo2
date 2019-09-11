@@ -1,6 +1,7 @@
 version: 2.1
 jobs:
   milan:
+    working_directory: ~/project
     docker:
      - image: cypress/browsers:chrome69
     steps:
@@ -16,14 +17,14 @@ jobs:
      - persist_to_workspace:
          root: ~/project
          paths:
-           - Demo
+           - .
   run_cypress:
     docker:
      - image: cypress/browsers:chrome69
     parallelism: 1
     steps:
      - attach_workspace:
-        at: ~/Demo
+        at: ~/project
      - run:
         name: Directory
         command: dir
