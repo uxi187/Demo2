@@ -2,8 +2,6 @@ version: 2.1
 jobs:
   milan:
     working_directory: ~/project
-    docker:
-     - image: cypress/browsers:chrome69
     steps:
      - run:
         name: Avoid hosts unknown for github
