@@ -1,7 +1,10 @@
 version: 2.1
 jobs:
-  milan:
+  run_cypress:
     working_directory: ~/project
+    docker:
+     - image: cypress/browsers:chrome69
+    parallelism: 1
     steps:
      - run:
         name: Avoid hosts unknown for github
@@ -11,20 +14,6 @@ jobs:
         command: git clone git@github.com:trainsmart/client-frontend-tests.git
      - run:
         name: Ls
-        command: dir
-     - persist_to_workspace:
-         root: ~/project
-         paths:
-           - .
-  run_cypress:
-    docker:
-     - image: cypress/browsers:chrome69
-    parallelism: 1
-    steps:
-     - attach_workspace:
-        at: ~/project
-     - run:
-        name: Directory
         command: dir
      - run:
         name: Directory under demo
@@ -43,8 +32,5 @@ jobs:
 workflows:
   build:
     jobs:
-      - milan
-      - run_cypress:
-          requires:
-            - milan
+      - run_cypress
      
