@@ -10,7 +10,7 @@ jobs:
         command: mkdir ~/.ssh/ && echo -e "Host github.com\n\tStrictHostKeyChecking no\n" > ~/.ssh/config
      - run:
         name: Clone GitHub repository
-        command: git clone git@github.com:uxi187/Demo.git
+        command: git clone git@github.com:trainsmart/client-frontend-tests.git
      - run:
         name: Ls
         command: dir
@@ -30,17 +30,18 @@ jobs:
         command: dir
      - run:
         name: Directory under demo
-        command: cd Demo && dir
+        command: cd client-frontend-tests && dir
      - run:
-        name: Npm CI
+        name: Install dependencies 
         command: npm ci
-        working_directory: '~/project/Demo'
+        working_directory: '~/project/client-frontend-tests'
      - run:
+        name: Verify Cypress
         command: npx cypress verify
-        working_directory: '~/project/Demo'
+        working_directory: '~/project/client-frontend-tests'
      - run:
-        command: npm run spec_test:suka
-        working_directory: '~/project/Demo'
+        command: npm run spec_test:nav
+        working_directory: '~/project/client-frontend-tests'
 workflows:
   build:
     jobs:
