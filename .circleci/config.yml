@@ -10,7 +10,7 @@ jobs:
         name: Avoid hosts unknown for github
         command: mkdir ~/.ssh/ && echo -e "Host github.com\n\tStrictHostKeyChecking no\n" > ~/.ssh/config
      - run:
-        name: Clone GitHub repository
+        name: Clone GitHub repository 1
         command: git clone https://github.com/uxi187/Demo2.git
      - run:
         name: Ls
