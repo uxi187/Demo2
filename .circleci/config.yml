@@ -1,36 +1,66 @@
-version: 2.1
 jobs:
-  run_cypress:
+  run_cypress_coach_tests_dev:
     working_directory: ~/project
     docker:
      - image: cypress/browsers:chrome69
     parallelism: 1
     steps:
+     - checkout
+     - restore_cache:
+        keys:
+        - cache-{{ arch }}-{{ .Branch }}-{{ checksum "package.json" }}
      - run:
-        name: Avoid hosts unknown for github
-        command: mkdir ~/.ssh/ && echo -e "Host github.com\n\tStrictHostKeyChecking no\n" > ~/.ssh/config
-     - run:
-        name: Clone GitHub repository 1
-        command: git clone https://github.com/uxi187/Demo2.git
-     - run:
-        name: Ls
-        command: dir
-     - run:
-        name: Directory under demo
-        command: cd client-frontend-tests && dir
-     - run:
-        name: Install dependencies 
+        name: Install dependencies
         command: npm ci
-        working_directory: '~/project/client-frontend-tests'
      - run:
         name: Verify Cypress
         command: npx cypress verify
-        working_directory: '~/project/client-frontend-tests'
+     - save_cache:
+        key: cache-{{ arch }}-{{ .Branch }}-{{ checksum "package.json" }}
+        paths:
+        - ~/.npm
      - run:
-        command: npm run spec_test:nav
-        working_directory: '~/project/client-frontend-tests'
-workflows:
+        name: Cleaning up old reports...
+        command: npm run cleanup
+     - run:
+        name: Running cypress tests on dev environment...
+        command: npm run spec_test:suka
+     - run:
+        name: Generating BDD report.
+        command: npm run report
+        when: always
+     - run:
+        name: Generating MochaAwesome report...
+        command: npm run merge_reports && npm run generate_mochawesome_report
+        when: always
+     - store_artifacts:
+        path: ~/project/test-report
+     - store_artifacts:
+        path: ~/project/cypress/screenshots
+     - store_artifacts:
+        path: ~/project/mochawesomereport
+     - store_test_results:
+        path: ~/project/mochawesomereport
+        prefix: test
+     - run:
+        name: Posting slack message...
+        command: export SLACK_WEBHOOK_URL=$SLACK_WEBHOOK && npx cypress-slack-reporter --report-dir mochawesomereport --verbose
+        when: always
   build:
+    docker:
+      - image: cypress/browsers:chrome69
+    steps:
+      - slack/notify:
+          color: '#42e2a4'
+          include_job_number_field: false
+          message: Custom message
+          webhook: $SLACK_WEBHOOK
+orbs:
+  slack: circleci/slack@3.3.0 
+version: 2.1
+workflows:
+  your-workflow:
     jobs:
-      - run_cypress
+      - build
+      - run_cypress_coach_tests_dev
      
